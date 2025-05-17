@@ -17,7 +17,7 @@ customer_category AS (
     SELECT 	
         owner_id,
         avg_monthly_trnx,
-        CASE                                         -- Categorize customers based on avg monthly transactions
+        CASE                                        -- Categorize customers based on avg monthly transactions
             WHEN avg_monthly_trnx >= 10 THEN 'High Frequency'
             WHEN avg_monthly_trnx BETWEEN 3 AND 9 THEN 'Medium Frequency'
             ELSE 'Low Frequency'

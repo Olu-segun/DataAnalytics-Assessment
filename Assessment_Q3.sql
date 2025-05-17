@@ -11,4 +11,4 @@ SELECT
 FROM savings_savingsaccount s
 JOIN plans_plan p ON s.plan_id = p.id   -- Join plans to savings accounts
 GROUP BY s.plan_id, s.owner_id, type    -- Aggregate by plan and owner
-HAVING inactivity_days >= 365;           -- Filter accounts inactive for 1 year or more
+HAVING inactivity_days >= 365;          -- Filter accounts inactive for 1 year or more
