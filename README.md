@@ -1,4 +1,4 @@
-# DataAnalytics-Assessment
+# Data-Analytics-Assessment
 This repository contains solutions to the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis scenarios using tables such as:
 
 users_customuser – containings customer information
