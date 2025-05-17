@@ -18,7 +18,7 @@ savings_investment_customer AS (
 )
 SELECT  
     si.owner_id,
-    CONCAT(u.first_name, ' ', u.last_name) AS name, -- Concatenate first and last name
+    CONCAT(u.first_name, ' ', u.last_name) AS name,     -- Concatenate first and last name
     SUM(p.is_regular_savings = 1) AS savings_count,     -- Count savings plans per customer
     SUM(p.is_a_fund = 1) AS investment_count,           -- Count investment plans per customer
     COALESCE(t.total_deposits, 0) AS total_deposits     -- Total deposits, 0 if none
