@@ -2,7 +2,7 @@ WITH total_savings AS (
 	 -- Calculate total deposits per customer.
     SELECT 
 			owner_id, 
-			SUM(confirmed_amount) AS total_deposits
+			FORMAT(SUM(confirmed_amount /100.0), 2) AS total_deposits  -- Convert confirmed_amount from kobo to naira and format with 2 decimal places.
     FROM savings_savingsaccount
     GROUP BY owner_id
 ),
@@ -27,4 +27,4 @@ JOIN users_customuser u ON si.owner_id = u.id
 JOIN plans_plan p ON p.owner_id = si.owner_id
 LEFT JOIN total_savings t ON si.owner_id = t.owner_id
 GROUP BY si.owner_id, u.first_name, u.last_name, t.total_deposits
-ORDER BY total_deposits DESC;  -- Sort by total deposits descending
+ORDER BY CAST(REPLACE(t.total_deposits, ',', '') AS DECIMAL) DESC; -- Sort by total deposits descending
