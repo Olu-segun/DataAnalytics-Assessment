@@ -12,8 +12,9 @@ savings_savingsaccount – transaction records and savings data of users
 
 withdrawals_withdrawal -  Stores information about user's withdrawals
 
+---
 
-## Task 1 : Write a query to find customers with at least one funded savings plan AND one funded investment plan, sorted by total deposits.
+## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
 ### 🎯 Goal
 Identify customers who:
@@ -21,7 +22,6 @@ Identify customers who:
 - Have **at least one investment plan** (`is_a_fund = 1`)  
 - Display their total confirmed savings deposits.
 
----
 
 ### 🛠️ Approach
 
@@ -43,83 +43,68 @@ Identify customers who:
 4. **Ordering:**
    - Sorted the results by `total_deposits` in descending order to highlight customers with the highest savings.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Group vs Filter Logic:**
   - Initially tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped subquery or CTE.
 
 - **Missing Deposits:**
-  - Some customers had no deposits, which caused null values when joining totals.
-  - Resolved this using `COALESCE` to default missing values to zero.
-
+  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to zero.
+  
 - **Ambiguous Joins:**
   - Care was taken to ensure correct joins between user, savings, and plans tables to avoid duplicated or missing rows.
 
 - **Column Grouping:**
   - Needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
----
-
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
+
+---
+
 ## Task 2 :  Calculate the average number of transactions per customer per month and categorize them. 
 
 ### 🎯 Goal
 Classify customers based on how frequently they make transactions in their savings accounts and group them into **High**, **Medium**, or **Low** frequency categories.
 
----
-
 ### 🛠️ Approach
 
 1. **Monthly Transaction Count:**
-   - Created a CTE `trnx_count_per_month` to count how many transactions each customer deposited in each month.
-   - Used `MONTHNAME(transaction_date)` to extract the month name.
+   - I created a CTE `trnx_count_per_month` to count how many transactions each customer deposited in each month.
+   - I used `MONTHNAME(transaction_date)` to extract the month name.
 
 2. **Average Monthly Transactions per Customer:**
-   - Aggregated the monthly counts in a second CTE `Avg_trxn_per_customer`.
-   - Calculated the average number of transactions per customer across all active months.
-
+   - I Aggregated the monthly counts in a second CTE `Avg_trxn_per_customer` and calculated the average number of transactions per customer across all active months.
+    
 3. **Customer Categorization:**
-   - In the third CTE `customer_category`, customers were segmented based on average monthly transactions:
+   - In the third CTE `customer_category`,  I segmented customers based on average monthly transactions:
      - **High Frequency**: ≥ 10 transactions/month
      - **Medium Frequency**: 3–9 transactions/month
      - **Low Frequency**: < 3 transactions/month
 
 4. **Final Aggregation:**
-   - Counted how many customers fall into each category.
-   - Calculated the average monthly transaction count per category for summary analysis.
-
----
-
+   - I Counted how many customers fall into each category and calculated the average monthly transaction count per category for summary analysis.
+   
 ### ⚠️ Challenges Faced
 
 - **Grouping Accuracy:**
   - Initially grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
 
 - **Category Thresholds:**
-  - Decided thresholds for High, Medium, and Low frequencies to reflect meaningful business segmentation; could be adjusted based on actual business benchmarks.
+  - I Decided thresholds for High, Medium, and Low frequencies to reflect meaningful business segmentation; could be adjusted based on actual business benchmarks.
 
 - **Rounding and Readability:**
   - Rounded average transaction values to 1 decimal place using `ROUND()` for better presentation in final output.
 
-- **Semantic Labels:**
-  - Used intuitive labels like "High Frequency" to make results understandable for non-technical stakeholders.
-
----
-
 ### ✅ Outcome
 This query provides marketing and customer success teams with an actionable segmentation of users based on how actively they engage with the savings platform. It enables tailored communication strategies for each frequency group.
 
-
+---
 
 ## Task 3 : Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days)
 
 ### 🎯 Goal
 Identify savings and investment accounts that have had **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
-
----
 
 ### 🛠️ Approach
 
@@ -141,8 +126,6 @@ Identify savings and investment accounts that have had **no transactions in the 
 5. **Filter Inactive Accounts:**
    - Applied `HAVING inactivity_days >= 365` to only return accounts inactive for at least one year.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Accurate Grouping:**
@@ -154,10 +137,11 @@ Identify savings and investment accounts that have had **no transactions in the 
 - **Plan Type Conflicts:**
   - Edge cases where both `is_a_fund` and `is_regular_savings` might be false were handled by assigning `'other'`.
 
----
-
 ### ✅ Outcome
 The final output lists all accounts with **over 1 year of inactivity**, categorized by plan type. This data can support user retention strategies or identify stale plans that may need to be closed or reactivated.
+
+---
+
 ## Task 4 : For each customer, assuming the profit_per_transaction is 0.1% of the transaction value, calculate:
   # Account tenure (months since signup)
   # Total transactions
@@ -166,8 +150,6 @@ The final output lists all accounts with **over 1 year of inactivity**, categori
 
 ### 🎯 Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
-
----
 
 ### 🛠️ Approach
 
@@ -193,8 +175,6 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
    - Displayed customer ID, name, tenure, total transactions, and estimated CLV.
    - Ordered results by CLV descending to highlight the most valuable customers.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Division by Zero:**
@@ -206,7 +186,8 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
 - **Assumption Clarity:**
   - Assumed that all transactions contribute equally to profit (0.1%) and occur steadily over time.
 
----
+
 
 ### ✅ Outcome
 This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing and customer success teams.
+
