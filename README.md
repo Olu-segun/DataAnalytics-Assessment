@@ -5,13 +5,11 @@
 This repository contains solutions for the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis scenarios using tables such as:
 
 users_customuser – containings customer information
-
 plans_plan – details of savings and investment plans
-
 savings_savingsaccount – transaction records and savings data of users
-
 withdrawals_withdrawal -  Stores information about user's withdrawals
 
+---
 
 ## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
@@ -51,9 +49,8 @@ Identify customers who:
   - Initially tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped subquery or CTE.
 
 - **Missing Deposits:**
-  - Some customers had no deposits, which caused null values when joining totals.
-  - Resolved this using `COALESCE` to default missing values to zero.
-
+  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to zero.
+  
 - **Ambiguous Joins:**
   - Care was taken to ensure correct joins between user, savings, and plans tables to avoid duplicated or missing rows.
 
@@ -77,23 +74,21 @@ Classify customers based on how frequently they make transactions in their savin
 ### 🛠️ Approach
 
 1. **Monthly Transaction Count:**
-   - Created a CTE `trnx_count_per_month` to count how many transactions each customer deposited in each month.
-   - Used `MONTHNAME(transaction_date)` to extract the month name.
+   - I created a CTE `trnx_count_per_month` to count how many transactions each customer deposited in each month.
+   - I used `MONTHNAME(transaction_date)` to extract the month name.
 
 2. **Average Monthly Transactions per Customer:**
-   - Aggregated the monthly counts in a second CTE `Avg_trxn_per_customer`.
-   - Calculated the average number of transactions per customer across all active months.
-
+   - I Aggregated the monthly counts in a second CTE `Avg_trxn_per_customer` and calculated the average number of transactions per customer across all active months.
+    
 3. **Customer Categorization:**
-   - In the third CTE `customer_category`, customers were segmented based on average monthly transactions:
+   - In the third CTE `customer_category`,  I segmented customers based on average monthly transactions:
      - **High Frequency**: ≥ 10 transactions/month
      - **Medium Frequency**: 3–9 transactions/month
      - **Low Frequency**: < 3 transactions/month
 
 4. **Final Aggregation:**
-   - Counted how many customers fall into each category.
-   - Calculated the average monthly transaction count per category for summary analysis.
-
+   - I Counted how many customers fall into each category and calculated the average monthly transaction count per category for summary analysis.
+   
 ---
 
 ### ⚠️ Challenges Faced
