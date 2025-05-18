@@ -1,7 +1,7 @@
 
 # Data-Analytics-Assessment
 
-This repository contains solutions for the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis scenarios using tables such as:
+This repository contains solutions to the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis business problem using tables such as:
 
 users_customuser – containings customer information
 
@@ -9,7 +9,7 @@ plans_plan – details of savings and investment plans
 
 savings_savingsaccount – transaction records and savings data of users
 
-withdrawals_withdrawal -  Stores information about user's withdrawals
+withdrawals_withdrawal -  Stores information about user's withdrawal pattern.
 
 ---
 
@@ -25,16 +25,15 @@ Identify customers who:
 ###  Approach
 
 1. **Calculate Total Deposits:**
-   - Used a CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table.
-   - Grouped by `owner_id`.
+   - I used a CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table and grouped by `owner_id`.
 
 2. **Filter Qualified Customers:**
    - In the `savings_investment_customer` CTE, filtered customers who have **at least one savings plan** and **one investment fund** using `HAVING` with conditional sums from the `plans_plan` table.
 
 3. **Final Selection and Join:**
-   - Joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
-   - Joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
-   - Aggregated data per customer to:
+   - I joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
+   - I joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
+   - I aggregated data per customer to:
      - Count number of savings and investment plans.
      - Fetch total confirmed deposits.
      - Concatenate first and last names as `name`.
@@ -45,16 +44,13 @@ Identify customers who:
 ###  Challenges Faced
 
 - **Group vs Filter Logic:**
-  - Initially tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped subquery or CTE.
+  - Initially, I tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a CTE.
 
 - **Missing Deposits:**
-  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to zero.
-  
-- **Ambiguous Joins:**
-  - Care was taken to ensure correct joins between user, savings, and plans tables to avoid duplicated or missing rows.
+  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to 0.
 
 - **Column Grouping:**
-  - Needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
+  - I needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
