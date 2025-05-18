@@ -1,5 +1,5 @@
 WITH total_savings AS (
-	 -- Calculate total deposits per customer
+	 -- Calculate total deposits per customer.
     SELECT 
 			owner_id, 
 			SUM(confirmed_amount) AS total_deposits
