@@ -191,6 +191,8 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
 This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing and customer success teams.
 
 **Phone:** +2348161264527
+
 **Email**: Olukayodeoluseguno@gmail.com
+
 **LinkedIn:** www.linkedin.com/in/olukayodeolusegun
 
