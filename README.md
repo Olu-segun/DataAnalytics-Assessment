@@ -13,7 +13,7 @@ savings_savingsaccount – transaction records and savings data of users
 withdrawals_withdrawal -  Stores information about user's withdrawals
 
 
-## Task 1 : Write a query to find customers with at least one funded savings plan AND one funded investment plan, sorted by total deposits.
+## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
 ### 🎯 Goal
 Identify customers who:
@@ -64,6 +64,9 @@ Identify customers who:
 
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
+
+---
+
 ## Task 2 :  Calculate the average number of transactions per customer per month and categorize them. 
 
 ### 🎯 Goal
@@ -112,7 +115,7 @@ Classify customers based on how frequently they make transactions in their savin
 ### ✅ Outcome
 This query provides marketing and customer success teams with an actionable segmentation of users based on how actively they engage with the savings platform. It enables tailored communication strategies for each frequency group.
 
-
+---
 
 ## Task 3 : Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days)
 
@@ -158,12 +161,15 @@ Identify savings and investment accounts that have had **no transactions in the 
 
 ### ✅ Outcome
 The final output lists all accounts with **over 1 year of inactivity**, categorized by plan type. This data can support user retention strategies or identify stale plans that may need to be closed or reactivated.
+
+---
+
 ## Task 4 : For each customer, assuming the profit_per_transaction is 0.1% of the transaction value, calculate:
   # Account tenure (months since signup)
   # Total transactions
   # Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)
   # Order by estimated CLV from highest to lowest
-
+---
 ### 🎯 Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
 
