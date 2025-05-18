@@ -5,8 +5,11 @@
 This repository contains solutions for the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis scenarios using tables such as:
 
 users_customuser – containings customer information
+
 plans_plan – details of savings and investment plans
+
 savings_savingsaccount – transaction records and savings data of users
+
 withdrawals_withdrawal -  Stores information about user's withdrawals
 
 ---
@@ -19,7 +22,6 @@ Identify customers who:
 - Have **at least one investment plan** (`is_a_fund = 1`)  
 - Display their total confirmed savings deposits.
 
----
 
 ### 🛠️ Approach
 
@@ -41,8 +43,6 @@ Identify customers who:
 4. **Ordering:**
    - Sorted the results by `total_deposits` in descending order to highlight customers with the highest savings.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Group vs Filter Logic:**
@@ -57,8 +57,6 @@ Identify customers who:
 - **Column Grouping:**
   - Needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
----
-
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
 
@@ -68,8 +66,6 @@ The query provides a clear and accurate summary of customers who are actively en
 
 ### 🎯 Goal
 Classify customers based on how frequently they make transactions in their savings accounts and group them into **High**, **Medium**, or **Low** frequency categories.
-
----
 
 ### 🛠️ Approach
 
@@ -89,23 +85,16 @@ Classify customers based on how frequently they make transactions in their savin
 4. **Final Aggregation:**
    - I Counted how many customers fall into each category and calculated the average monthly transaction count per category for summary analysis.
    
----
-
 ### ⚠️ Challenges Faced
 
 - **Grouping Accuracy:**
   - Initially grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
 
 - **Category Thresholds:**
-  - Decided thresholds for High, Medium, and Low frequencies to reflect meaningful business segmentation; could be adjusted based on actual business benchmarks.
+  - I Decided thresholds for High, Medium, and Low frequencies to reflect meaningful business segmentation; could be adjusted based on actual business benchmarks.
 
 - **Rounding and Readability:**
   - Rounded average transaction values to 1 decimal place using `ROUND()` for better presentation in final output.
-
-- **Semantic Labels:**
-  - Used intuitive labels like "High Frequency" to make results understandable for non-technical stakeholders.
-
----
 
 ### ✅ Outcome
 This query provides marketing and customer success teams with an actionable segmentation of users based on how actively they engage with the savings platform. It enables tailored communication strategies for each frequency group.
@@ -116,8 +105,6 @@ This query provides marketing and customer success teams with an actionable segm
 
 ### 🎯 Goal
 Identify savings and investment accounts that have had **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
-
----
 
 ### 🛠️ Approach
 
@@ -139,8 +126,6 @@ Identify savings and investment accounts that have had **no transactions in the 
 5. **Filter Inactive Accounts:**
    - Applied `HAVING inactivity_days >= 365` to only return accounts inactive for at least one year.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Accurate Grouping:**
@@ -152,8 +137,6 @@ Identify savings and investment accounts that have had **no transactions in the 
 - **Plan Type Conflicts:**
   - Edge cases where both `is_a_fund` and `is_regular_savings` might be false were handled by assigning `'other'`.
 
----
-
 ### ✅ Outcome
 The final output lists all accounts with **over 1 year of inactivity**, categorized by plan type. This data can support user retention strategies or identify stale plans that may need to be closed or reactivated.
 
@@ -164,11 +147,9 @@ The final output lists all accounts with **over 1 year of inactivity**, categori
   # Total transactions
   # Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)
   # Order by estimated CLV from highest to lowest
----
+
 ### 🎯 Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
-
----
 
 ### 🛠️ Approach
 
@@ -194,8 +175,6 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
    - Displayed customer ID, name, tenure, total transactions, and estimated CLV.
    - Ordered results by CLV descending to highlight the most valuable customers.
 
----
-
 ### ⚠️ Challenges Faced
 
 - **Division by Zero:**
@@ -207,7 +186,8 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
 - **Assumption Clarity:**
   - Assumed that all transactions contribute equally to profit (0.1%) and occur steadily over time.
 
----
+
 
 ### ✅ Outcome
 This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing and customer success teams.
+---
