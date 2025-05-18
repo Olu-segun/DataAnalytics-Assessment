@@ -1,5 +1,5 @@
 WITH total_savings AS (
-	-- Calculate total deposits per customer
+	 -- Calculate total deposits per customer
     SELECT 
 			owner_id, 
 			SUM(confirmed_amount) AS total_deposits
@@ -7,7 +7,7 @@ WITH total_savings AS (
     GROUP BY owner_id
 ),
 savings_investment_customer AS (
-    -- Identify customers with at least one savings plan AND one investment plan
+     -- Identify customers with at least one savings plan AND one investment plan
     SELECT p.owner_id
     FROM plans_plan p
     GROUP BY p.owner_id

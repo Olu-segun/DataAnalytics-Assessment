@@ -1,6 +1,6 @@
 SELECT
-    u.id AS customer_id,  -- Unique customer ID
-    CONCAT(u.first_name, ' ', u.last_name) AS name,  -- Full name
+    u.id AS customer_id,   -- Unique customer ID
+    CONCAT(u.first_name, ' ', u.last_name) AS name,   -- Full name
     TIMESTAMPDIFF(MONTH, u.date_joined, CURDATE()) AS tenure_months,  -- Tenure in months
     COUNT(s.id) AS total_transactions,  -- Total number of transactions
     ROUND(
