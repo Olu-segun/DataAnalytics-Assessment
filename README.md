@@ -1,41 +1,39 @@
 
 # Data-Analytics-Assessment
 
+This repository contains solutions to the Cowrywise Data Analytics SQL technical assessment. It includes SQL queries designed to solve real-world data analysis business problem using tables such as:
 
-This repository contains solutions for the Cowrywise Data Analytics SQL Assessment. It includes SQL queries designed to solve real-world data analysis scenarios using tables such as:
+**users_customuse**r – contains customer demographic and contact information
 
-users_customuser – containings customer information
+**plans_plan** – contains records of plans created by customers.
 
-plans_plan – details of savings and investment plans
+**savings_savingsaccount** – contains records of deposit transactions.
 
-savings_savingsaccount – transaction records and savings data of users
-
-withdrawals_withdrawal -  Stores information about user's withdrawals
+**withdrawals_withdrawal** - contains records of withdrawal transactions
 
 ---
 
 ## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
-### 🎯 Goal
+###  Goal
 Identify customers who:
 - Have **at least one savings plan** (`is_regular_savings = 1`)  
 - Have **at least one investment plan** (`is_a_fund = 1`)  
 - Display their total confirmed savings deposits.
 
 
-### 🛠️ Approach
+###  Approach
 
 1. **Calculate Total Deposits:**
-   - Used a CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table.
-   - Grouped by `owner_id`.
+   - I used a CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table and grouped by `owner_id`.
 
 2. **Filter Qualified Customers:**
    - In the `savings_investment_customer` CTE, filtered customers who have **at least one savings plan** and **one investment fund** using `HAVING` with conditional sums from the `plans_plan` table.
 
 3. **Final Selection and Join:**
-   - Joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
-   - Joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
-   - Aggregated data per customer to:
+   - I joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
+   - I joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
+   - I aggregated data per customer to:
      - Count number of savings and investment plans.
      - Fetch total confirmed deposits.
      - Concatenate first and last names as `name`.
@@ -43,19 +41,16 @@ Identify customers who:
 4. **Ordering:**
    - Sorted the results by `total_deposits` in descending order to highlight customers with the highest savings.
 
-### ⚠️ Challenges Faced
+###  Challenges Faced
 
 - **Group vs Filter Logic:**
-  - Initially tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped subquery or CTE.
+  - Initially, I tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a CTE.
 
 - **Missing Deposits:**
-  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to zero.
-  
-- **Ambiguous Joins:**
-  - Care was taken to ensure correct joins between user, savings, and plans tables to avoid duplicated or missing rows.
+  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to 0.
 
 - **Column Grouping:**
-  - Needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
+  - I needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
@@ -64,10 +59,10 @@ The query provides a clear and accurate summary of customers who are actively en
 
 ## Task 2 :  Calculate the average number of transactions per customer per month and categorize them. 
 
-### 🎯 Goal
+###  Goal
 Classify customers based on how frequently they make transactions in their savings accounts and group them into **High**, **Medium**, or **Low** frequency categories.
 
-### 🛠️ Approach
+###  Approach
 
 1. **Monthly Transaction Count:**
    - I created a CTE `trnx_count_per_month` to count how many transactions each customer deposited in each month.
@@ -85,7 +80,7 @@ Classify customers based on how frequently they make transactions in their savin
 4. **Final Aggregation:**
    - I Counted how many customers fall into each category and calculated the average monthly transaction count per category for summary analysis.
    
-### ⚠️ Challenges Faced
+###  Challenges Faced
 
 - **Grouping Accuracy:**
   - Initially grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
@@ -103,10 +98,10 @@ This query provides marketing and customer success teams with an actionable segm
 
 ## Task 3 : Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days)
 
-### 🎯 Goal
+###  Goal
 Identify savings and investment accounts that have had **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
 
-### 🛠️ Approach
+###  Approach
 
 1. **Join Relevant Tables:**
    - Joined `savings_savingsaccount` (`s`) with `plans_plan` (`p`) to access both account activity and plan type details.
@@ -126,7 +121,7 @@ Identify savings and investment accounts that have had **no transactions in the 
 5. **Filter Inactive Accounts:**
    - Applied `HAVING inactivity_days >= 365` to only return accounts inactive for at least one year.
 
-### ⚠️ Challenges Faced
+###  Challenges Faced
 
 - **Accurate Grouping:**
   - Needed to group by `plan_id`, `owner_id`, and `type` to correctly compute max transaction dates per account and categorize the plan.
@@ -148,10 +143,10 @@ The final output lists all accounts with **over 1 year of inactivity**, categori
   # Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)
   # Order by estimated CLV from highest to lowest
 
-### 🎯 Goal
+###  Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
 
-### 🛠️ Approach
+###  Approach
 
 1. **Join Relevant Tables:**
    - Joined `users_customuser` (`u`) with `savings_savingsaccount` (`s`) to relate users with their savings transactions.
@@ -175,7 +170,7 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
    - Displayed customer ID, name, tenure, total transactions, and estimated CLV.
    - Ordered results by CLV descending to highlight the most valuable customers.
 
-### ⚠️ Challenges Faced
+###  Challenges Faced
 
 - **Division by Zero:**
   - Some users may have `tenure_months = 0`, especially new signups. Solved by using `NULLIF(..., 0)` to prevent errors.
@@ -190,4 +185,10 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
 
 ### ✅ Outcome
 This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing and customer success teams.
+
+**Phone:** +2348161264527
+
+**Email**: Olukayodeoluseguno@gmail.com
+
+**LinkedIn:** www.linkedin.com/in/olukayodeolusegun
 
