@@ -108,8 +108,11 @@ The final output lists all accounts with **over 1 year of inactivity**, categori
 
 ## Task 4 : For each customer, assuming the profit_per_transaction is 0.1% of the transaction value, calculate:
 **Account tenure (months since signup)**
+
 **Total transactions**
+
 **Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)**
+
 **Order by estimated CLV from highest to lowest**
 
 ### Business Goal
@@ -141,6 +144,27 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
 
 ### ✅ Outcome
 This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing teams.
+
+---
+
+Challenges Faced
+
+---
+
+**Group vs Filter Logic:**
+   Initially, I tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped CTE.
+ 
+**Missing Deposits:**
+   Some customers had no deposits, which caused null values when joining tables, but I resolved this using `COALESCE` to default missing values to 0.
+
+**Division by Zero error:**
+   Some users may have `tenure_months = 0`, especially new signups, but I solved it by using `NULLIF(..., 0)` to prevent the error.
+  
+
+
+
+
+**Name:** Olukayode Olusegun Opeyemi
 
 **Phone:** +2348161264527
 
