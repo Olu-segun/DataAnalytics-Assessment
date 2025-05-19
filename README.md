@@ -1,6 +1,6 @@
 
 # Data-Analytics-Assessment
----
+
 # Overview
 
 This repository contains solutions to Cowrywise SQL assessment for Data Analytics role. It includes queries designed to solve real-world data analysis business problem using tables such as:
