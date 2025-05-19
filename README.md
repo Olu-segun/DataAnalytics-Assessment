@@ -161,7 +161,7 @@ This query produces a ranked list of customers by estimated lifetime value. It h
 
 **Division by Zero error:**
 
-   Some users may have `tenure_months = 0`, especially new signups, but I solved it by using `NULLIF(..., 0)` to prevent the error.
+   Some users have `tenure_months = 0`, especially new signups, but I solved it by using `NULLIF(..., 0)` to prevent the error.
   
 ---
 
