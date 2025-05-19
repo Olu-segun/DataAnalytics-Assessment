@@ -27,4 +27,4 @@ JOIN users_customuser u ON si.owner_id = u.id
 JOIN plans_plan p ON p.owner_id = si.owner_id
 LEFT JOIN total_savings t ON si.owner_id = t.owner_id
 GROUP BY si.owner_id, u.first_name, u.last_name, t.total_deposits
-ORDER BY CAST(REPLACE(t.total_deposits, ',', '') AS DECIMAL) DESC; -- Sort by total deposits descending
+ORDER BY CAST(REPLACE(t.total_deposits, ',', '') AS DECIMAL) DESC;  -- Sort by total deposits descending

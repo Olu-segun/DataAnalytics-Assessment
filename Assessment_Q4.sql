@@ -1,5 +1,5 @@
 SELECT
-    u.id AS customer_id,   -- Unique customer ID
+    u.id AS customer_id,    -- Unique customer ID
     CONCAT(u.first_name, ' ', u.last_name) AS name,   -- Full name.
     TIMESTAMPDIFF(MONTH, u.date_joined, CURDATE()) AS tenure_months,  -- Calculate tenure in months,
     FORMAT(COUNT(s.id),0) AS total_transactions,  -- Total number of transactions

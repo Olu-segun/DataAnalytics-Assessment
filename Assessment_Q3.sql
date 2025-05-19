@@ -1,7 +1,7 @@
 SELECT 
-    s.plan_id,              -- Plan ID from savings accounts.
-    s.owner_id,             -- Owner (customer) ID
-    CASE                    -- Determine plan type based on flags
+    s.plan_id,               -- Plan ID from savings accounts.
+    s.owner_id,              -- Owner (customer) ID
+    CASE                     -- Determine plan type based on flags
         WHEN p.is_a_fund = 1 THEN 'investments'
         WHEN p.is_regular_savings = 1 THEN 'savings'
         ELSE 'other'
