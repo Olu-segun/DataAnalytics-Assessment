@@ -1,8 +1,8 @@
 WITH trnx_count_per_month AS (
     SELECT 	
         owner_id,
-        MONTHNAME(transaction_date) AS month_name,    -- Extract month name from transaction date
-        COUNT(*) AS monthly_transaction               -- Count transactions per owner per month.
+        MONTHNAME(transaction_date) AS month_name,     -- Extract month name from transaction date
+        COUNT(*) AS monthly_transaction                -- Count transactions per owner per month.
     FROM savings_savingsaccount
     GROUP BY owner_id, month_name
 ),

@@ -6,8 +6,8 @@ SELECT
         WHEN p.is_regular_savings = 1 THEN 'savings'
         ELSE 'other'
     END AS type,
-    MAX(DATE(s.transaction_date)) AS last_transaction_date,     -- Most recent transaction date
-    DATEDIFF(CURDATE(), MAX(s.transaction_date)) AS inactivity_days  -- Days since last transaction
+    MAX(DATE(s.transaction_date)) AS last_transaction_date,      -- Most recent transaction date
+    DATEDIFF(CURDATE(), MAX(s.transaction_date)) AS inactivity_days   -- Days since last transaction
 FROM savings_savingsaccount s
 JOIN plans_plan p ON s.plan_id = p.id   -- Join plans to savings accounts
 GROUP BY s.plan_id, s.owner_id, type    -- Aggregate by plan and owner

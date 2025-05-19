@@ -1,8 +1,8 @@
 SELECT
     u.id AS customer_id,    -- Unique customer ID
-    CONCAT(u.first_name, ' ', u.last_name) AS name,   -- Full name.
+    CONCAT(u.first_name, ' ', u.last_name) AS name,    -- Concatenate first name and last name to get name.
     TIMESTAMPDIFF(MONTH, u.date_joined, CURDATE()) AS tenure_months,  -- Calculate tenure in months,
-    FORMAT(COUNT(s.id),0) AS total_transactions,  -- Total number of transactions
+    FORMAT(COUNT(s.id),0) AS total_transactions,   -- Total number of transactions
     FORMAT(
         (COUNT(s.id) / NULLIF(TIMESTAMPDIFF(MONTH, u.date_joined, CURDATE() ), 0)) * 12 
         * AVG(s.confirmed_amount / 100 * 0.001), 2
