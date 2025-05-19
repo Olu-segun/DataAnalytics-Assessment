@@ -15,7 +15,7 @@ This repository contains solutions to the Cowrywise Data Analytics SQL technical
 
 ## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
-###  Goal
+###  Business Goal
 Identify customers who:
 - Have **at least one savings plan** (`is_regular_savings = 1`)  
 - Have **at least one investment plan** (`is_a_fund = 1`)  
@@ -59,7 +59,7 @@ The query provides a clear and accurate summary of customers who are actively en
 
 ## Task 2 :  Calculate the average number of transactions per customer per month and categorize them. 
 
-###  Goal
+###  Business Goal
 Classify customers based on how frequently they make transactions in their savings accounts and group them into **High**, **Medium**, or **Low** frequency categories.
 
 ###  Approach
@@ -98,7 +98,7 @@ This query provides marketing and customer success teams with an actionable segm
 
 ## Task 3 : Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days)
 
-###  Goal
+### Business Goal
 Identify savings and investment accounts that have had **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
 
 ###  Approach
@@ -143,7 +143,7 @@ The final output lists all accounts with **over 1 year of inactivity**, categori
   # Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)
   # Order by estimated CLV from highest to lowest
 
-###  Goal
+### Business Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
 
 ###  Approach
