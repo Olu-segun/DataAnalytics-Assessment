@@ -1,7 +1,7 @@
 
 # Data-Analytics-Assessment
 
-This repository contains solutions to Cowrywise Data Analytics SQL technical assessment. It includes SQL queries designed to solve real-world data analysis business problem using tables such as:
+This repository contains solutions to Cowrywise SQL assessment for Data Analytics role. It includes queries designed to solve real-world data analysis business problem using tables such as:
 
 **users_customuser table** – contains customer demographic and contact information
 
