@@ -2,7 +2,7 @@ WITH total_savings AS (
 	-- Calculate total deposits per customer
     SELECT 
         owner_id, 
-        SUM(confirmed_amount / 100.0) AS total_deposits
+        SUM(confirmed_amount / 100.0) AS total_deposits -- Convert confirmed_amount from Kobo to Naira and sum it
     FROM savings_savingsaccount
     GROUP BY owner_id
 ),
