@@ -39,7 +39,7 @@ Identify customers who:
 3. **Final Selection and Join:**
    - Joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
    - Joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
-   - Aggregated data per customer to; count number of savings and investment plans, fetch total confirmed deposits and Concatenate first and last names as `name`
+   - Aggregated data per customer to; count number of savings and investment plans, fetch total confirmed deposits and concatenate first and last names as `name`
   
 4. **Ordering:**
    - Sorted the results by `total_deposits` in descending order to highlight customers with the highest total deposits.
