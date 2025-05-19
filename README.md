@@ -79,7 +79,7 @@ This query provides the finance team with an actionable segmentation of users ba
 ## Task 3 : Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days)
 
 ### Business Goal
-Identify savings and investment accounts that have had **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
+Identify savings and investment accounts that have **no transactions in the past 365 days**, helping the business flag inactive accounts for re-engagement or review.
 
 ###  Approach
 
