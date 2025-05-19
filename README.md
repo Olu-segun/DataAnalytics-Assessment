@@ -3,7 +3,7 @@
 
 This repository contains solutions to the Cowrywise Data Analytics SQL technical assessment. It includes SQL queries designed to solve real-world data analysis business problem using tables such as:
 
-**users_customuse**r – contains customer demographic and contact information
+**users_customuser** – contains customer demographic and contact information
 
 **plans_plan** – contains records of plans created by customers.
 
