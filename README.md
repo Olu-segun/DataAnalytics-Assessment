@@ -152,17 +152,18 @@ This query produces a ranked list of customers by estimated lifetime value. It h
 ---
 
 **Group vs Filter Logic:**
+
    Initially, I tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a grouped CTE.
  
 **Missing Deposits:**
+
    Some customers had no deposits, which caused null values when joining tables, but I resolved this using `COALESCE` to default missing values to 0.
 
 **Division by Zero error:**
+
    Some users may have `tenure_months = 0`, especially new signups, but I solved it by using `NULLIF(..., 0)` to prevent the error.
   
-
-
-
+---
 
 **Name:** Olukayode Olusegun Opeyemi
 
