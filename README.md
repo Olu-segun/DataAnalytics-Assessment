@@ -3,13 +3,13 @@
 
 This repository contains solutions to the Cowrywise Data Analytics SQL technical assessment. It includes SQL queries designed to solve real-world data analysis business problem using tables such as:
 
-**users_customuser** – contains customer demographic and contact information
+**users_customuser table** – contains customer demographic and contact information
 
-**plans_plan** – contains records of plans created by customers.
+**plans_plan table** – contains records of plans created by customers.
 
-**savings_savingsaccount** – contains records of deposit transactions.
+**savings_savingsaccount table** – contains records of deposit transactions.
 
-**withdrawals_withdrawal** - contains records of withdrawal transactions
+**withdrawals_withdrawal table** - contains records of withdrawal transactions
 
 ---
 
