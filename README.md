@@ -13,6 +13,10 @@ This repository contains solutions to the Cowrywise Data Analytics SQL technical
 
 ---
 
+Per-Question Explanations
+
+---
+
 ## Task 1 : Write a query to find customers with at least one funded savings plan and one funded investment plan, sorted by total deposits.
 
 ###  Business Goal
@@ -38,16 +42,6 @@ Identify customers who:
 4. **Ordering:**
    - Sorted the results by `total_deposits` in descending order to highlight customers with the highest total deposits.
 
-###  Challenges Faced
-
-- **Group vs Filter Logic:**
-  - Initially, I tried to filter customers directly in the main query using `WHERE`, but the correct approach required aggregation and filtering in the `HAVING` clause within a CTE.
-
-- **Missing Deposits:**
-  - Some customers had no deposits, which caused null values when joining totals, but I resolved this using `COALESCE` to default missing values to 0.
-
-- **Column Grouping:**
-  - I needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
 ### ✅ Outcome
 The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total deposits.
@@ -76,14 +70,6 @@ Classify customers based on how frequently they make transactions in their savin
 
 4. **Final Aggregation:**
    - I Counted how many customers fall into each category and calculated the average monthly transaction count per category for summary analysis.
-   
-###  Challenges Faced
-
-- **Grouping Accuracy:**
-  - Initially, I grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
-
-- **Rounding and Readability:**
-  - Rounded average transaction values to 1 decimal place using `ROUND()` for better presentation in final output.
 
 ### ✅ Outcome
 This query provides the finance team with an actionable segmentation of users based on how actively they engage with the savings platform.
@@ -115,27 +101,16 @@ Identify savings and investment accounts that have had **no transactions in the 
 5. **Filter Inactive Accounts:**
    - Applied `HAVING inactivity_days >= 365` to only return accounts inactive for at least one year.
 
-###  Challenges Faced
-
-- **Accurate Grouping:**
-  - Needed to group by `plan_id`, `owner_id`, and `type` to correctly compute max transaction dates per account and categorize the plan.
-
-- **Correct Use of `HAVING`:**
-  - Since `inactivity_days` is derived from an aggregate (`MAX`), it required `HAVING` instead of `WHERE`.
-
-- **Plan Type Conflicts:**
-  - Edge cases where both `is_a_fund` and `is_regular_savings` might be false were handled by assigning `'other'`.
-
 ### ✅ Outcome
 The final output lists all accounts with **over 1 year of inactivity**, categorized by plan type. This data can support user retention strategies or identify stale plans that may need to be closed or reactivated.
 
 ---
 
 ## Task 4 : For each customer, assuming the profit_per_transaction is 0.1% of the transaction value, calculate:
-  # Account tenure (months since signup)
-  # Total transactions
-  # Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)
-  # Order by estimated CLV from highest to lowest
+**Account tenure (months since signup)**
+**Total transactions**
+**Estimated CLV (Assume: CLV = (total_transactions / tenure) * 12 * avg_profit_per_transaction)**
+**Order by estimated CLV from highest to lowest**
 
 ### Business Goal
 Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been active (tenure) and how much they transact. This helps marketing identify high-value customers for retention or upsell efforts.
@@ -164,21 +139,8 @@ Estimate **Customer Lifetime Value (CLV)** based on how long a customer has been
    - Displayed customer ID, name, tenure, total transactions, and estimated CLV.
    - Ordered results by CLV descending to highlight the most valuable customers.
 
-###  Challenges Faced
-
-- **Division by Zero:**
-  - Some users may have `tenure_months = 0`, especially new signups. Solved by using `NULLIF(..., 0)` to prevent errors.
-
-- **CLV Model Simplification:**
-  - This is a simplified CLV model and does not account for churn, revenue growth, or seasonal behavior.
-
-- **Assumption Clarity:**
-  - Assumed that all transactions contribute equally to profit (0.1%) and occur steadily over time.
-
-
-
 ### ✅ Outcome
-This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing and customer success teams.
+This query produces a ranked list of customers by estimated lifetime value. It helps identify **high-engagement, high-value users** that are critical to business growth, making it useful for strategic decision-making in marketing teams.
 
 **Phone:** +2348161264527
 
