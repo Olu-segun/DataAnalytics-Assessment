@@ -13,7 +13,7 @@ This repository contains solutions to the Cowrywise Data Analytics SQL technical
 
 ---
 
-Per-Question Explanations
+# Per-Question Explanations
 
 ---
 
@@ -147,7 +147,7 @@ This query produces a ranked list of customers by estimated lifetime value. It h
 
 ---
 
-Challenges Faced
+# Challenges Faced
 
 ---
 
