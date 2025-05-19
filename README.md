@@ -25,21 +25,18 @@ Identify customers who:
 ###  Approach
 
 1. **Calculate Total Deposits:**
-   - I used a CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table and grouped by `owner_id`.
+   - I used CTE (`total_savings`) to compute total `confirmed_amount` per customer from the `savings_savingsaccount` table and grouped it by `owner_id`.
 
 2. **Filter Qualified Customers:**
-   - In the `savings_investment_customer` CTE, filtered customers who have **at least one savings plan** and **one investment fund** using `HAVING` with conditional sums from the `plans_plan` table.
+   - In the `savings_investment_customer` CTE, I filtered customers who have **at least one savings plan** and **one investment fund** using `HAVING` with conditional sums from the `plans_plan` table.
 
 3. **Final Selection and Join:**
-   - I joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
-   - I joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
-   - I aggregated data per customer to:
-     - Count number of savings and investment plans.
-     - Fetch total confirmed deposits.
-     - Concatenate first and last names as `name`.
-
+   - Joined `savings_investment_customer` with `users_customuser` for customer details and `plans_plan` to count savings/investment plans.
+   - Joined `total_savings` using `LEFT JOIN` to include users even if they have zero deposits.
+   - Aggregated data per customer to; count number of savings and investment plans, fetch total confirmed deposits and Concatenate first and last names as `name`
+  
 4. **Ordering:**
-   - Sorted the results by `total_deposits` in descending order to highlight customers with the highest savings.
+   - Sorted the results by `total_deposits` in descending order to highlight customers with the highest total deposits.
 
 ###  Challenges Faced
 
@@ -72,7 +69,7 @@ Classify customers based on how frequently they make transactions in their savin
    - I Aggregated the monthly counts in a second CTE `Avg_trxn_per_customer` and calculated the average number of transactions per customer across all active months.
     
 3. **Customer Categorization:**
-   - In the third CTE `customer_category`,  I segmented customers based on average monthly transactions:
+   - In the third CTE `customer_category`,  I categorized customers based on average monthly transactions:
      - **High Frequency**: ≥ 10 transactions/month
      - **Medium Frequency**: 3–9 transactions/month
      - **Low Frequency**: < 3 transactions/month
@@ -83,16 +80,13 @@ Classify customers based on how frequently they make transactions in their savin
 ###  Challenges Faced
 
 - **Grouping Accuracy:**
-  - Initially grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
-
-- **Category Thresholds:**
-  - I Decided thresholds for High, Medium, and Low frequencies to reflect meaningful business segmentation; could be adjusted based on actual business benchmarks.
+  - Initially, I grouped only by customer without considering the need to calculate per-month transactions—fixed by grouping on `owner_id, month_name`.
 
 - **Rounding and Readability:**
   - Rounded average transaction values to 1 decimal place using `ROUND()` for better presentation in final output.
 
 ### ✅ Outcome
-This query provides marketing and customer success teams with an actionable segmentation of users based on how actively they engage with the savings platform. It enables tailored communication strategies for each frequency group.
+This query provides the finance team with an actionable segmentation of users based on how actively they engage with the savings platform.
 
 ---
 
