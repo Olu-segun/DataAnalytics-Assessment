@@ -53,7 +53,7 @@ Identify customers who:
   - I needed to include all selected fields (`first_name`, `last_name`, `total_deposits`) in the `GROUP BY` clause to comply with SQL standards.
 
 ### ✅ Outcome
-The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total contributions.
+The query provides a clear and accurate summary of customers who are actively engaged in both savings and investment products, along with their total deposits.
 
 ---
 
