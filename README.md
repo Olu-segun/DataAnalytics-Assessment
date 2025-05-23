@@ -23,8 +23,8 @@ This repository contains solutions to Cowrywise SQL assessment for Data Analytic
 
 ###  Business Goal
 Identify customers who:
-- Have **at least one savings plan** (`is_regular_savings = 1`)  
-- Have **at least one investment plan** (`is_a_fund = 1`)  
+- Have **at least one funded savings plan** (`is_regular_savings = 1`)  
+- Have **at least one funded investment plan** (`is_a_fund = 1`)  
 - Display their total confirmed savings deposits.
 
 
